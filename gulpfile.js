@@ -4,6 +4,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var webserver = require('gulp-webserver');
 var clean = require('gulp-clean-css'); //压缩css
 var uglify = require('gulp-uglify'); //压缩js
+var babel = require('gulp-babel'); //es5-->es6
 var url = require('url');
 var path = require('path');
 var fs = require('fs');
@@ -21,10 +22,22 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('./src/css'))
 });
 
+
 //监听scss
 gulp.task('watch', function() {
     return gulp.watch('./src/scss/index.scss', gulp.series('sass'))
 });
+
+//es5-->es6
+gulp.task('minbabel', function() {
+    return gulp.src('./src/js/index.js')
+        .pipe(babel({
+            presets: 'es2015'
+        }))
+        .pipe(gulp.dest('./src/js'))
+});
+
+
 
 //压缩js
 // gulp.task('minuglify', function() {
@@ -41,7 +54,8 @@ gulp.task('server', function() {
             port: 3000,
             open: true,
             livereload: true,
-            host: '192.168.0.15',
+            // host: '192.168.0.15',
+            host: '192.168.43.77',
             middleware: function(req, res, next) {
                 var pathname = url.parse(req.url).pathname;
                 if (pathname === '/favicon.ico') {
@@ -58,4 +72,7 @@ gulp.task('server', function() {
             }
 
         }))
-})
+});
+
+
+gulp.task('dev', gulp.series('sass', 'minbabel', 'server', 'watch'));
