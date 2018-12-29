@@ -23,7 +23,7 @@ body {
         flex-direction: column;
         .h-top {
             width: 100%;
-            height: 60%;
+            height: 55%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -34,13 +34,15 @@ body {
         }
         .h-search {
             width: 100%;
-            height: 40%;
+            height: 45%;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #333333;
             >input {
                 width: 90%;
                 height: 70%;
+                border: 1px solid #ccc;
             }
         }
     }
