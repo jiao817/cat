@@ -54,8 +54,7 @@ gulp.task('server', function() {
             port: 3000,
             open: true,
             livereload: true,
-            // host: '192.168.0.15',
-            host: '192.168.43.77',
+            host: '192.168.0.15',
             middleware: function(req, res, next) {
                 var pathname = url.parse(req.url).pathname;
                 if (pathname === '/favicon.ico') {
